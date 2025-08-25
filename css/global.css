@@ -1,0 +1,20 @@
+@font-face {
+  font-family: 'Ethnocentric';
+  src: url('../asset/font/Ethnocentric\ Rg\ It.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'eras-itc-bold';
+  src: url('../asset/font/eras-itc-bold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'eras-itc-regular';
+  src: url('../asset/font/eras-demi.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}

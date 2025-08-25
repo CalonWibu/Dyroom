@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Test MagicMouse</title>
+  <link rel="stylesheet" href="https://unpkg.com/magicmouse.js/dist/magic-mouse.css">
+  <style>
+    body {
+      background: black;
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    button {
+      padding: 20px 40px;
+      font-size: 24px;
+      border: none;
+      background: yellow;
+      color: black;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body class="magic-mouse"> <!-- ✅ Tambahkan class ini -->
+
+  <button class="magic-hover">Coba Klik</button> <!-- ✅ Ini target hover -->
+
+  <script src="https://unpkg.com/magicmouse.js/dist/magic-mouse.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      magicMouse({
+        cursorOuter: "circle-basic",      // Tipe lingkaran luar
+        hoverEffect: "circle-move",       // Efek saat hover
+        hoverItemMove: false,             // Item tidak ikut bergerak
+        defaultCursor: false              // Hilangkan kursor default
+      });
+    });
+  </script>
+</body>
+</html>

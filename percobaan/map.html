@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Bounded World Map</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    html, body, #map {
+      height: 100%;
+      margin: 0;
+      background: #262626;
+    }
+    .leaflet-control { display: none; }
+    #countrySelect {
+      position: absolute;
+      top: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+      padding: 8px 15px;
+      background: rgba(0,0,0,0.7);
+      color: white;
+      border: none;
+      border-radius: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+  <select id="countrySelect" style="display: none;">
+    <option value="">Pilih Negara</option>
+    <option value="id">Indonesia</option>
+    <option value="jp">Jepang</option>
+    <option value="us">Amerika</option>
+  </select>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    // Batas dunia yang valid (dalam koordinat [lat, lng])
+    const worldBounds = L.latLngBounds(
+      L.latLng(-85, -180), // Sudut kiri bawah
+      L.latLng(85, 180)    // Sudut kanan atas
+    );
+
+    const map = L.map('map', {
+      center: [20, 0],
+      zoom: 2,
+      maxBounds: worldBounds, // Ini yang membatasi area
+      maxBoundsViscosity: 1.0, // Seberapa "keras" batasannya (1.0 = sangat keras)
+      zoomControl: false,
+      attributionControl: false
+    });
+
+    // Tile layer
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
+      maxZoom: 5,
+      minZoom: 2,
+      noWrap: true,
+      bounds: worldBounds // Juga batasi tile yang dimuat
+    }).addTo(map);
+
+    // Marker dan interaksi (sama seperti sebelumnya)
+    const countryCoords = {
+      id: [-6.2, 106.8],
+      jp: [35.7, 139.7],
+      us: [38.9, -77.0]
+    };
+
+    const originMarker = L.circleMarker([20.5937, 78.9629], {
+      radius: 5,
+      color: '#00ffff',
+      fillOpacity: 1
+    }).addTo(map).bindPopup("Origin");
+
+    let destMarker = null;
+    let connectionLine = null;
+
+    document.getElementById('countrySelect').addEventListener('change', function() {
+      const code = this.value;
+      if (!code) return;
+      
+      const coords = countryCoords[code];
+      
+      if (destMarker) map.removeLayer(destMarker);
+      if (connectionLine) map.removeLayer(connectionLine);
+      
+      destMarker = L.circleMarker(coords, {
+        radius: 5,
+        color: '#ff00ff',
+        fillColor: '#ff00ff'
+      }).addTo(map).bindPopup(this.options[this.selectedIndex].text);
+      
+      connectionLine = L.polyline(
+        [[20.5937, 78.9629], coords], 
+        {color: '#00ffff', weight: 2}
+      ).addTo(map);
+      
+      map.flyTo(coords, 4);
+    });
+
+    // Tambahan: Prevent zoom out terlalu jauh
+    map.setMinZoom(2);
+  </script>
+</body>
+</html>

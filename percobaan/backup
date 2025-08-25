@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/global.css">
+  <title>DYROOM</title>
+</head>
+<body>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      background-color: #000000;
+    }
+
+    header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 10;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 30px;
+    }
+
+    #search {
+      color: #ffffff;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.hero video {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+  to bottom,
+  rgba(0, 0, 0, 0.53) 0%,
+  rgba(0, 0, 0, 0.48) 88%,
+  rgba(0, 0, 0, 1) 100%
+);
+}
+
+h1 {
+  font-family: 'Ethnocentric', sans-serif;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ffffff;
+  font-size: 60px;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  z-index: 9;
+}
+
+.scroll-line {
+  position: absolute;
+  bottom: 30px;
+  width: 2px;
+  background: rgba(255, 255, 255, 0.2);
+  height: 50px;
+  overflow: hidden;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.scroll-line::after {
+  content: "";
+  height: 20px;
+  width: 2px;
+  background: white;
+  animation: scrollAnimasi 1.5s infinite ease-in-out;
+  display: block;
+}
+
+@keyframes scrollAnimasi {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+}
+
+.display-produk {
+  margin-top: 100px;
+  /* background-color: #E6FF00; */
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.card {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.produk-gambar {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.produk-gambar img {
+  width: 70%;
+}
+
+.produk-gambar .nama-gambar {
+  font-family: 'Ethnocentric', sans-serif;
+  color: #ffffff;
+  margin-top: -30px;
+  text-align: center;
+
+}
+
+.produk-detail {
+  /* background-color: #E6FF00; */
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+}
+
+.produk-detail .nama-detail {
+  font-family: 'Ethnocentric', sans-serif;
+  color: #ffffff;
+  font-size: 40px;
+}
+
+.produk-detail .deskripsi-detail {
+  margin-top: 5px;
+  font-family: 'eras-itc-regular', sans-serif;
+  color: #ffffff;
+  font-size: 20px;
+}
+
+
+.harga-display {
+  margin-top: 10px;
+  font-family: 'eras-itc-bold', sans-serif;
+}
+
+.harga-display .harga-asli {
+  color: #FF9D00;
+  font-size: 40px;
+}
+
+.harga-display .harga-diskon {
+  color: red;
+  font-size: 20px;
+
+}
+
+.btn-beli {
+  background-color: #ffffff00;
+  border: none;
+  color: #ffffff;
+  border: 3px solid #ffffff;
+  padding: 20px 32px;
+  text-align: center;
+  font-size: 22px;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 20px;
+  font-family: 'eras-itc-bold', sans-serif;
+  margin-top: 20px;
+  transition: 0.2s ease-in-out;
+}
+
+.btn-beli:hover {
+  background-color: #E6FF00;
+  color: #000000;
+  border-color: #E6FF00;
+}
+
+  </style>
+  <header>
+    <nav>
+      <img src="logo.png" alt="DYROOM">
+      <i class="bi bi-search" id="search"></i>
+    </nav>
+  </header>
+  <main>
+    <section class="hero">
+      <video src="asset/Hero.mp4" autoplay loop muted playsinline style="width: 100%;"></video>
+      <div class="hero-overlay"></div>
+      <h1>find your<br><span style="color: #E6FF00;">dream car</span></h1>
+      <div class="scroll-line"></div>
+    </section>
+    <section class="display-produk">
+      <div class="card">
+        <div class="produk-gambar">
+          <img src="asset/barang/bugatti_bagus_png.png" alt="mobil">
+          <p class="nama-gambar">Bugatti Chiron</p>
+        </div>
+        <div class="produk-detail">
+          <p class="nama-detail">Bugatti Chiron</p>
+          <p class="deskripsi-detail">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labo....
+          </p>
+
+            <p class="harga-display">
+              <span class="harga-asli">Rp. 20.000.000.000</span>
+              <span class="harga-diskon"><s>Rp. 90.000.000.000</s></span>
+            </p>
+
+          <button class="btn-beli">LIHAT</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="produk-gambar">
+          <img src="asset/barang/bugatti_bagus_png.png" alt="mobil">
+          <p class="nama-gambar">Bugatti Chiron</p>
+        </div>
+        <div class="produk-detail">
+          <p class="nama-detail">Bugatti Chiron</p>
+          <p class="deskripsi-detail">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labo....
+          </p>
+
+            <p class="harga-display">
+              <span class="harga-asli">Rp. 20.000.000.000</span>
+              <span class="harga-diskon"><s>Rp. 90.000.000.000</s></span>
+            </p>
+
+          <button class="btn-beli">LIHAT</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="produk-gambar">
+          <img src="asset/barang/bugatti_bagus_png.png" alt="mobil">
+          <p class="nama-gambar">Bugatti Chiron</p>
+        </div>
+        <div class="produk-detail">
+          <p class="nama-detail">Bugatti Chiron</p>
+          <p class="deskripsi-detail">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labo....
+          </p>
+
+            <p class="harga-display">
+              <span class="harga-asli">Rp. 20.000.000.000</span>
+              <span class="harga-diskon"><s>Rp. 90.000.000.000</s></span>
+            </p>
+
+          <button class="btn-beli">LIHAT</button>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
