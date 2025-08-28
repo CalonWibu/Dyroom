@@ -1,0 +1,134 @@
+<?php
+session_start();
+include '../koneksi/db.php'; 
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = $_POST["email"];
+    $pass  = $_POST["password"];
+    $sql = "SELECT * FROM users WHERE email = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows == 1) {
+        $row = $result->fetch_assoc();
+
+        if (password_verify($pass, $row["password"])) {
+            $_SESSION["email"] = $row["email"];
+            $_SESSION["nama"]  = $row["nama"];
+            // $redirect = isset($_SESSION["redirect_url"]) ? $_SESSION["redirect_url"] : "../index.php";
+            // unset($_SESSION["redirect_url"]);
+            // if ($_SESSION["redirect_url"] == "") {
+            header("Location: ../view.php");
+            exit();
+        } else {
+            echo "<p style='color:red;text-align:center;'>❌ Password salah!</p>";
+        }
+    } else {
+        echo "<p style='color:red;text-align:center;'>❌ Email tidak ditemukan!</p>";
+    }
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+      
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+          font-family: sans-serif;
+        }
+
+        body {
+          background-color: #0d0d0d;
+          color: white;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          min-height: 100vh;
+        }
+
+        .form-container {
+          background: #111;
+          padding: 30px;
+          border-radius: 15px;
+          box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+          width: 350px;
+          text-align: center;
+        }
+
+        .form-container h2 {
+          margin-bottom: 20px;
+          font-weight: normal;
+          letter-spacing: 1px;
+        }
+
+        .form-container label {
+          display: block;
+          text-align: left;
+          margin-bottom: 5px;
+          font-size: 14px;
+          color: #ccc;
+        }
+
+        .form-container input {
+          width: 100%;
+          padding: 12px;
+          margin-bottom: 15px;
+          border: none;
+          border-radius: 8px;
+          background: #e0e0e0;
+          font-size: 14px;
+        }
+
+        .form-container button {
+          width: 100%;
+          padding: 12px;
+          background: #1a73e8;
+          border: none;
+          border-radius: 8px;
+          color: white;
+          font-weight: bold;
+          cursor: pointer;
+          transition: 0.3s;
+        }
+
+        .form-container button:hover {
+          background: #0d47a1;
+        }
+
+        a {
+          color: #ffffff;
+          text-decoration: none;
+          background-color: #f5b800;
+          padding: 10px 20px;
+          border-radius: 10px;
+          position: absolute;
+          left: 10px;
+          top: 10px;
+        }
+    </style>
+</head>
+<body>
+<a href="register.php">Register</a>
+
+<div class="form-container">
+  <h2>Login</h2>
+  <form method="POST" action="">
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" required>
+
+    <button type="submit">SUBMIT</button>
+  </form>
+</div>
+</body>
+</html>

@@ -1,3 +1,5 @@
+<?php include 'global/global.php'; ?>
+
 <!DOCTYPE html> 
 <html lang="en">
 <head>
@@ -398,7 +400,9 @@
   <header>
     <nav>
       <img src="logo.png" alt="DYROOM">
-      <i class="bi bi-search" id="search"></i>
+      <a href="view.php">
+        <i class="bi bi-search" id="search"></i>
+      </a>
     </nav>
   </header>
 
@@ -411,7 +415,10 @@
     </section>
 
     <section class="slider-wrapper">
-    <i class="bi bi-microsoft" id="lookall"></i>
+      <a href="view.php">
+        <i class="bi bi-microsoft" id="lookall"></i>
+
+      </a>
       <div class="display-produk" id="produkSlider">
         <div class="card" id="card1">
           <div class="produk-gambar">

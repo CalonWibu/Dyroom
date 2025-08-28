@@ -1,3 +1,24 @@
+<?php include 'global/global.php'; 
+
+
+$nama  = $_POST['nama'] ?? '';
+$seri  = $_POST['seri'] ?? '';
+$tipe  = $_POST['tipe'] ?? '';
+$harga = $_POST['harga'] ?? '';
+
+$query = "SELECT * FROM mobil WHERE 1=1 ORDER BY RAND()";
+if ($nama != '') $query .= " AND nama_car LIKE '%".$conn->real_escape_string($nama)."%'";
+if ($seri != '') $query .= " AND seri LIKE '%".$conn->real_escape_string($seri)."%'";
+if ($tipe != '') $query .= " AND tipe LIKE '%".$conn->real_escape_string($tipe)."%'";
+
+$result = $conn->query($query);
+
+$seri_list = $conn->query("SELECT DISTINCT seri FROM mobil");
+$tipe_list = $conn->query("SELECT DISTINCT tipe FROM mobil");
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,6 +57,7 @@
             justify-content: center;
             align-items: center;
             margin-top: 100px;
+            margin-bottom: 100px;
             flex-direction: column;
         }
 
@@ -91,7 +113,10 @@
       color: black;
     }
 
-    /* card */
+
+
+
+
     .card-container {
         margin-top: 50px;
         width: 90%;
@@ -117,6 +142,7 @@
       height: 170px;
       object-fit: cover;
       display: block;
+      background-color: #FF4400;
     }
 
     .card .seri {
@@ -174,104 +200,127 @@
       background: #f5b800;
       color: black;
     }
+    .filter {
+      position: absolute;
+      margin-top: 150px;
+      margin-left: 5px;
+      background-color: #313131;
+      border-radius: 0 0 10px 10px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+      align-items: flex-end;
+
+      max-height: 0;   
+      padding: 0 20px; 
+      transition: max-height 0.5s ease, padding 0.5s ease;
+    }
+
+
+    #filter-box.open {
+      max-height: 500px;   
+      padding: 20px;     
+    }
+
+    .filter label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .filter input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
     </style>
     <?php include 'components/navbar.php'; ?>
 
     <div class="garis-atas"></div>
 
     <main style="position: relative;">
-        <div class="search-box">
-            <i class="bi bi-funnel"></i>
-            <input type="text" placeholder="search your dream car here">
-            <button><i class="bi bi-search"></i> Cari</button>
-        </div>
+ 
+ 
+ <!-- search -->
+   <form method="POST" class="search-box">
+            
+            <i class="bi bi-funnel" style="cursor: pointer;" id="filter-btn"></i>
+            <input type="text" name="nama" placeholder="search your dream car here"  value="<?= htmlspecialchars($nama) ?>">
+            <button type="submit"><i class="bi bi-search"></i> Cari</button>
+            
+            
+            <div class="filter" id="filter-box">
 
+
+            <label for="seri">Brand</label>   
+            <input list="seriList" name="seri" placeholder="Cari seri..." value="<?= htmlspecialchars($seri) ?>">
+                <datalist id="seriList">
+                  <?php while($row = $seri_list->fetch_assoc()) { ?>
+                    <option value="<?= $row['seri'] ?>">
+                  <?php } ?>
+                </datalist> 
+
+
+                <label for="tipe">Tipe</label>
+                        <input list="tipeList" name="tipe" placeholder="Cari tipe..." value="<?= htmlspecialchars($tipe) ?>">
+                        <datalist id="tipeList">
+                          <?php while($row = $tipe_list->fetch_assoc()) { ?>
+                            <option value="<?= $row['tipe'] ?>">
+                          <?php } ?>
+                        </datalist>
+
+            </div>
+    
+</form>
         <!-- card -->
-         <div class="card-container">
-             <div class="card">
-                 <img src="asset/barang/bugatti.jpg" alt="gambar mobil">
-                 <p class="seri">BUGATTI</p>
-                 <p class="nama-car">Bugatti Chiron</p>
-                 <span class="info">
-                     <p><i class="bi bi-fuel-pump-fill"></i> Bensin</p>
-                     <p><i class="bi bi-speedometer"></i> 12000Km</p>
-                     <p><i class="bi bi-car-front-fill"></i> sedan</p>
-                 </span>
-                 <p class="harga">Rp. 20.000.000.000</p>
-                 <button>LIHAT</button>
-             </div>
 
-                      <div class="card">
-                 <img src="asset/barang/bugatti.jpg" alt="gambar mobil">
-                 <p class="seri">BUGATTI</p>
-                 <p class="nama-car">Bugatti Chiron</p>
-                 <span class="info">
-                     <p><i class="bi bi-fuel-pump-fill"></i> Bensin</p>
-                     <p><i class="bi bi-speedometer"></i> 12000Km</p>
-                     <p><i class="bi bi-car-front-fill"></i> sedan</p>
-                 </span>
-                 <p class="harga">Rp. 20.000.000.000</p>
-                 <button>LIHAT</button>
-             </div>
+              <div class='card-container'>
+        <?php
+          if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) { ?>
+                      <div class='card'>
+                          <img src='../asset/mobil/<?= $row['img_car']?>' alt='<?=$row['nama_car']?>'>
+                          <p class='seri'><?=$row['seri']?></p>
+                          <p class='nama-car'><?=$row['nama_car']?></p>
+                          <span class='info'>
+                              <p><i class='bi bi-fuel-pump-fill'></i> <?=$row['energy']?></p>
+                              <p><i class='bi bi-speedometer'></i> <?=$row['speed']?> km/h</p>
+                              <p><i class='bi bi-car-front-fill'></i> <?=$row['tipe']?></p>
+                          </span>
+                          <p class='harga'>Rp. <?= number_format($row['harga'], 0, ',', '.') ?></p>
+
+                          <button  onclick="window.location.href='detail.php?nama=<?=$row['nama_car'] ?>'">LIHAT</button>
+                      </div>
+              <?php  }
+                } else {
+                  echo "<p>Tidak ada data mobil ditemukan.</p>";
+                }
+
+          ?>
 
 
-                      <div class="card">
-                 <img src="asset/barang/bugatti.jpg" alt="gambar mobil">
-                 <p class="seri">BUGATTI</p>
-                 <p class="nama-car">Bugatti Chiron</p>
-                 <span class="info">
-                     <p><i class="bi bi-fuel-pump-fill"></i> Bensin</p>
-                     <p><i class="bi bi-speedometer"></i> 12000Km</p>
-                     <p><i class="bi bi-car-front-fill"></i> sedan</p>
-                 </span>
-                 <p class="harga">Rp. 20.000.000.000</p>
-                 <button>LIHAT</button>
-             </div>
-
-
-                      <div class="card">
-                 <img src="asset/barang/bugatti.jpg" alt="gambar mobil">
-                 <p class="seri">BUGATTI</p>
-                 <p class="nama-car">Bugatti Chiron</p>
-                 <span class="info">
-                     <p><i class="bi bi-fuel-pump-fill"></i> Bensin</p>
-                     <p><i class="bi bi-speedometer"></i> 12000Km</p>
-                     <p><i class="bi bi-car-front-fill"></i> sedan</p>
-                 </span>
-                 <p class="harga">Rp. 20.000.000.000</p>
-                 <button>LIHAT</button>
-             </div>
-
-
-                      <div class="card">
-                 <img src="asset/barang/bugatti.jpg" alt="gambar mobil">
-                 <p class="seri">BUGATTI</p>
-                 <p class="nama-car">Bugatti Chiron</p>
-                 <span class="info">
-                     <p><i class="bi bi-fuel-pump-fill"></i> Bensin</p>
-                     <p><i class="bi bi-speedometer"></i> 12000Km</p>
-                     <p><i class="bi bi-car-front-fill"></i> sedan</p>
-                 </span>
-                 <p class="harga">Rp. 20.000.000.000</p>
-                 <button>LIHAT</button>
-             </div>
-
-
-                      <div class="card">
-                 <img src="asset/barang/bugatti.jpg" alt="gambar mobil">
-                 <p class="seri">BUGATTI</p>
-                 <p class="nama-car">Bugatti Chiron</p>
-                 <span class="info">
-                     <p><i class="bi bi-fuel-pump-fill"></i> Bensin</p>
-                     <p><i class="bi bi-speedometer"></i> 12000Km</p>
-                     <p><i class="bi bi-car-front-fill"></i> sedan</p>
-                 </span>
-                 <p class="harga">Rp. 20.000.000.000</p>
-                 <button>LIHAT</button>
-             </div>
 
 
          </div>
     </main>
+
+    <?php include 'components/footer.php'; ?>
+    <?php include 'components/animation.php'; ?>
+
+
+  <script>
+    const btn = document.getElementById('filter-btn');
+    const filterBox = document.getElementById('filter-box');
+
+    btn.addEventListener('click', () => {
+      filterBox.classList.toggle('open');
+    });
+  </script>
+
+
 </body>
 </html>
