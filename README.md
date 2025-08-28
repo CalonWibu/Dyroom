@@ -1,1 +1,3 @@
 # Dyroom
+
+#PLZ JANGAN NYOLONG KODE
