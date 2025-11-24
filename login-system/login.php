@@ -20,7 +20,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // $redirect = isset($_SESSION["redirect_url"]) ? $_SESSION["redirect_url"] : "../index.php";
             // unset($_SESSION["redirect_url"]);
             // if ($_SESSION["redirect_url"] == "") {
-            header("Location: ../view.php");
+            $_SESSION['intro'] = 0;
+            header("Location: ../../?url=view.php");
             exit();
         } else {
             echo "<p style='color:red;text-align:center;'>❌ Password salah!</p>";

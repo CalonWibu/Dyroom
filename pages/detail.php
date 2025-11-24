@@ -7,7 +7,7 @@ if ($nama == '') {
     ?>
     <script>
         alert('tidak ada bro');
-        window.location.href = 'view.php';
+        window.location.href = '?url=view';
     </script>
     <?php
     exit;
@@ -24,7 +24,7 @@ if ($result->num_rows > 0) {
     ?>
     <script>
         alert('tidak ada bro');
-        window.location.href = 'view.php';
+        window.location.href = '?url=view';
     </script>
     <?php
     exit;
@@ -37,16 +37,6 @@ $related = $stmt2->get_result();
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="css/global.css">
-    <title>Detail</title>
-</head>
-<body>
     <style>
         * {
             margin: 0;
@@ -218,7 +208,6 @@ $related = $stmt2->get_result();
     }
 
     </style>
-    <?php include 'components/navbar.php'; ?>
     <main>
         <div class="hero">
             <img src="/asset/mobil/<?= htmlspecialchars($mobil['img_car_detail']); ?>" alt="<?= htmlspecialchars($mobil['nama_car']); ?>">
@@ -257,9 +246,3 @@ $related = $stmt2->get_result();
   </div>
   <?php endif; ?>
     </main>
-    <?php include 'components/footer.php'; ?>
-    <?php include 'components/animation.php'; ?>
-
-        
-</body>
-</html>

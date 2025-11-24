@@ -20,7 +20,7 @@ $user = $res->fetch_assoc();
 $user_id = $user['id'] ?? null;
 
 if (!$user_id) {
-    header("Location: ../view.php");
+    header("Location: ../index.php?url=view");
     exit;
 }
 
@@ -71,7 +71,7 @@ if ($bayar === "yes") {
     $order = $rescek->fetch_assoc();
 
     if (!$order) {
-        header("Location: ../view.php");
+        header("Location: ../index.php?url=view");
         exit;
     }
     $lastOrderId = $order['id'];
@@ -242,17 +242,17 @@ $snapToken = \Midtrans\Snap::getSnapToken($datatransaksi);
         onSuccess: function(result){
           console.log(result);
           alert("Pembayaran berhasil!");
-          window.location.href = "../akun.php";
+          window.location.href = "../index.php?url=akun";
         },
         onPending: function(result){
           console.log(result);
           alert("Menunggu pembayaran...");
-          window.location.href = "../akun.php";
+          window.location.href = "../index.php?url=akun";
         },
         onError: function(result){
           console.log(result);
           alert("Pembayaran gagal!");
-          window.location.href = "../view.php";
+          window.location.href = "../index.php?url=view";
         },
         onClose: function(){
           alert("Popup ditutup tanpa menyelesaikan pembayaran");

@@ -1,6 +1,5 @@
 <?php include 'global/global.php'; 
 
-
 $nama  = $_POST['nama'] ?? '';
 $seri  = $_POST['seri'] ?? '';
 $tipe  = $_POST['tipe'] ?? '';
@@ -16,23 +15,16 @@ $result = $conn->query($query);
 $seri_list = $conn->query("SELECT DISTINCT seri FROM mobil");
 $tipe_list = $conn->query("SELECT DISTINCT tipe FROM mobil");
 
+$_SESSION['tittle'] = "DYROOM | SHOW ROOM";
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="css/global.css">
-    <title>View all</title>
-</head>
-<body>
     <style>
         * {
             margin: 0;
             padding: 0;
+            /* Tambahan ini penting agar ukuran tidak melebar keluar batas */
+            box-sizing: border-box; 
         }
 
         body {
@@ -62,14 +54,14 @@ $tipe_list = $conn->query("SELECT DISTINCT tipe FROM mobil");
         }
 
          .search-box {
-      display: flex;
-      align-items: center;
-      background: #1a1a1aff;
-      border-radius: 50px;
-      padding: 8px 12px 8px 15px;
-      width: 80%;
-      max-width: 90%;
-    }
+          display: flex;
+          align-items: center;
+          background: #1a1a1aff;
+          border-radius: 50px;
+          padding: 8px 12px 8px 15px;
+          width: 80%;
+          max-width: 90%;
+        }
 
 
     .search-box i {
@@ -114,9 +106,6 @@ $tipe_list = $conn->query("SELECT DISTINCT tipe FROM mobil");
     }
 
 
-
-
-
     .card-container {
         margin-top: 50px;
         width: 90%;
@@ -135,6 +124,9 @@ $tipe_list = $conn->query("SELECT DISTINCT tipe FROM mobil");
       color: white;
       box-shadow: 0 4px 10px rgba(0,0,0,0.4);
       transition: transform 0.3s;
+      display: flex; 
+      flex-direction: column; 
+      height: 350px;
     }
 
     .card img {
@@ -179,17 +171,18 @@ $tipe_list = $conn->query("SELECT DISTINCT tipe FROM mobil");
       font-weight: bold;
       color: #f5b800;
       font-size: 20px;
+      margin-top: auto; 
     }
 
 
     .card button {
-      flex: 1;
+      /* Flex 1 dihapus agar tombol tidak meregang aneh */
       background: transparent;
       border: 1px solid #f5b800;
       color: #f5b800;
       padding: 6px 0;
       margin: 10px 15px 15px 15px;
-    width: 90%;
+      width: calc(100% - 30px); /* Kalkulasi agar margin kiri kanan pas */
       border-radius: 5px;
       cursor: pointer;
       font-weight: bold;
@@ -220,7 +213,7 @@ $tipe_list = $conn->query("SELECT DISTINCT tipe FROM mobil");
 
     #filter-box.open {
       max-height: 500px;   
-      padding: 20px;     
+      padding: 20px;       
     }
 
     .filter label {
@@ -238,15 +231,14 @@ $tipe_list = $conn->query("SELECT DISTINCT tipe FROM mobil");
     }
 
     </style>
-    <?php include 'components/navbar.php'; ?>
+    
 
     <div class="garis-atas"></div>
 
     <main style="position: relative;">
  
  
- <!-- search -->
-   <form method="POST" class="search-box">
+ <form method="POST" class="search-box">
             
             <i class="bi bi-funnel" style="cursor: pointer;" id="filter-btn"></i>
             <input type="text" name="nama" placeholder="search your dream car here"  value="<?= htmlspecialchars($nama) ?>">
@@ -272,13 +264,10 @@ $tipe_list = $conn->query("SELECT DISTINCT tipe FROM mobil");
                             <option value="<?= $row['tipe'] ?>">
                           <?php } ?>
                         </datalist>
-
             </div>
     
 </form>
-        <!-- card -->
-
-              <div class='card-container'>
+        <div class='card-container'>
         <?php
           if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) { ?>
@@ -292,12 +281,11 @@ $tipe_list = $conn->query("SELECT DISTINCT tipe FROM mobil");
                               <p><i class='bi bi-car-front-fill'></i> <?=$row['tipe']?></p>
                           </span>
                           <p class='harga'>Rp. <?= number_format($row['harga'], 0, ',', '.') ?></p>
-
-                          <button  onclick="window.location.href='detail.php?nama=<?=$row['nama_car'] ?>'">LIHAT</button>
+                          <button  onclick="window.location.href='?url=detail&nama=<?=$row['nama_car'] ?>'">LIHAT</button>
                       </div>
               <?php  }
                 } else {
-                  echo "<p>Tidak ada data mobil ditemukan.</p>";
+                  echo "<p style='color:white'>Tidak ada data mobil ditemukan.</p>";
                 }
 
           ?>
@@ -308,8 +296,6 @@ $tipe_list = $conn->query("SELECT DISTINCT tipe FROM mobil");
          </div>
     </main>
 
-    <?php include 'components/footer.php'; ?>
-    <?php include 'components/animation.php'; ?>
 
 
   <script>

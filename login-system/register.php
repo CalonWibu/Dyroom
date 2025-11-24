@@ -107,7 +107,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // $redirect = isset($_SESSION["redirect_url"]) ? $_SESSION["redirect_url"] : "../view.php";
         // unset($_SESSION["redirect_url"]);
-        header("Location: ../view.php");
+        header("Location: ../../?url=view.php");
         exit();
     } else {
         echo "Error: " . $stmt->error;

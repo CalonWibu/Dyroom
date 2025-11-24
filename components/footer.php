@@ -1,4 +1,5 @@
 <style>
+
         .bg-footer {
       width: 80vw;
 

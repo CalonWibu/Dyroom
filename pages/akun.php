@@ -1,5 +1,4 @@
 <?php
-session_start();
 include 'koneksi/db.php';
 
 if (!isset($_SESSION['email'])) {
@@ -37,29 +36,25 @@ if ($order) {
         $country = $personal ? $personal['country'] : '';
     } else {
         die("lakukanlah transaksi untuk memasuki halaman ini!");
-        header("Location: view.php");
+        header("Location: ?url=view");
         exit;
     }
 } else {
     $country = '';
             die("lakukanlah transaksi untuk memasuki halaman ini!");
-        header("Location: view.php");
+        header("Location: ?url=view");
         exit;
 }
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8" />
-  <title>Bounded World Map</title>
-  <link rel="stylesheet" href="css/global.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <style>
     html, body, #map {
       height: 100%;
       margin: 0;
       background: #262626;
+    }
+
+    body {
+      overflow: hidden;
     }
 
     header {
@@ -103,9 +98,7 @@ if ($order) {
         gap: 80px;
     }
   </style>
-</head>
-<body>
-    <?php include 'components/navbar.php'; ?>
+
 
   <div id="map"></div>
   <div class="detail-order">
@@ -188,5 +181,4 @@ if ($order) {
       map.flyTo(coords, zoomLevel);
     }
   </script>
-</body>
-</html>
+

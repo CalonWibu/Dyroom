@@ -1,5 +1,6 @@
 <?php include 'global/global.php';
 
+
 if (!isset($_SESSION["email"]) || !isset($_POST["nama_car"]) || !isset($_POST["harga"])) {
     $_SESSION["redirect_url"] = $_SERVER["REQUEST_URI"];
     header("Location: login-system/register.php");
