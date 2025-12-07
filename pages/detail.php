@@ -1,6 +1,6 @@
 <?php include 'global/global.php'; 
 
-include 'koneksi/db.php';
+
 $nama = isset($_GET['nama']) ? urldecode($_GET['nama']) : '';
 
 if ($nama == '') {
@@ -42,7 +42,6 @@ $related = $stmt2->get_result();
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            /* border: 1px solid red; */
         }
 
         body {
@@ -56,7 +55,6 @@ $related = $stmt2->get_result();
 
 
         .hero {
-            /* background-color: blue; */
             display: flex;
             flex-direction: row;
             align-items: center;
@@ -75,12 +73,10 @@ $related = $stmt2->get_result();
             right: 10px;
             top: 180px;
             float: right;
-            /* background-color: yellow; */
             display: flex;
             flex-direction: column;
             align-items: center;
             width: 30px;
-            /* height: 100px; */
             gap: 10px;
             cursor: pointer;
         }
@@ -107,11 +103,8 @@ $related = $stmt2->get_result();
         }
 
         .info {
-            /* background-color: green; */
             display: flex;
             flex-direction: column;
-            /* width: 100%; */
-            /* margin-top: -10px; */
             color: white;
             margin-left: 30px;
         }
@@ -151,7 +144,6 @@ $related = $stmt2->get_result();
         }
 
         .deskripsi {
-            /* margin-left: 20px; */
             margin-top: 50px;
             color: white;
             font-family: sans-serif;
@@ -171,7 +163,6 @@ $related = $stmt2->get_result();
 
          .relate {
       margin-top: 200px;
-      /* width: 100%; */
       margin-left: 47px;
     }
 
@@ -210,7 +201,7 @@ $related = $stmt2->get_result();
     </style>
     <main>
         <div class="hero">
-            <img src="/asset/mobil/<?= htmlspecialchars($mobil['img_car_detail']); ?>" alt="<?= htmlspecialchars($mobil['nama_car']); ?>">
+            <img src="asset/mobil/<?= htmlspecialchars($mobil['img_car_detail']); ?>" alt="<?= htmlspecialchars($mobil['nama_car']); ?>">
         </div>
         <div class="color">
             <div class="red"></div>

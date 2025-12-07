@@ -25,19 +25,18 @@ $_SESSION['tittle'] = "DYROOM";
       #111111 100%
     );
     overflow-x: hidden;
-    font-family: sans-serif; /* Fallback font */
-    position: relative; /* Penting untuk container bintang */
+    font-family: sans-serif;
+    position: relative;
   }
 
-  /* === EFEK BINTANG (STAR EFFECT) CSS === */
   #star-container {
-    position: fixed; /* Agar bintang tetap diam saat scroll (paralax effect) */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1; /* Di belakang konten tapi di depan background body */
-    pointer-events: none; /* Agar tidak mengganggu klik */
+    z-index: -1;
+    pointer-events: none;
   }
 
   .star {
@@ -53,8 +52,7 @@ $_SESSION['tittle'] = "DYROOM";
     50% { opacity: 1; transform: scale(1.2); box-shadow: 0 0 10px rgba(255, 255, 255, 0.8); }
     100% { opacity: 0.2; transform: scale(0.8); }
   }
-  /* ========================================= */
-
+  
   header {
     position: absolute;
     top: 0;
@@ -76,14 +74,11 @@ $_SESSION['tittle'] = "DYROOM";
     cursor: pointer;
   }
 
-  /* === HERO SECTION === */
   .hero {
     position: relative;
     width: 100%;
     height: 100vh;
     overflow: hidden;
-    position: absolute; /* Sesuai request awal */
-    top: 0;
   }
 
   .hero video {
@@ -144,9 +139,8 @@ $_SESSION['tittle'] = "DYROOM";
     100% { transform: translateY(30px); opacity: 0; }
   }
 
-  /* === SLIDER SECTION === */
   .slider-wrapper {
-    margin-top: 100vh;
+    margin-top: 20px;
     position: relative;
     overflow: hidden;
     padding-top: 60px;
@@ -303,7 +297,6 @@ $_SESSION['tittle'] = "DYROOM";
     border-radius: 20px;
   }
 
-  /* === NEW EXPLORE SECTION STYLES === */
   section.explore {
     padding: 120px 50px;
     display: flex;
@@ -329,7 +322,7 @@ $_SESSION['tittle'] = "DYROOM";
   }
 
   .explore-text h2 {
-    font-family: 'eras-itc-bold', sans-serif; /* Menggunakan font existing */
+    font-family: 'eras-itc-bold', sans-serif;
     text-align: left;
     font-size: 50px;
     line-height: 1.2;
@@ -365,7 +358,6 @@ $_SESSION['tittle'] = "DYROOM";
     transform: rotate(0deg) scale(1.05);
   }
 
-  /* Tombol Explore Khusus */
   .btn-explore {
     text-decoration: none;
     font-family: 'Ethnocentric', sans-serif;
@@ -387,8 +379,6 @@ $_SESSION['tittle'] = "DYROOM";
     transform: translateX(10px);
   }
 
-
-  /* === REVIEW SECTION === */
   section.review {
     margin-top: 50px;
     margin-bottom: 400px;
@@ -464,7 +454,6 @@ $_SESSION['tittle'] = "DYROOM";
     margin-top: -110px;
   }
 
-  /* Utility & Animations */
   #lookall {
     position: absolute;
     top: 40px; 
@@ -494,14 +483,12 @@ $_SESSION['tittle'] = "DYROOM";
   }
 
 
-  /* === MEDIA QUERIES === */
   @media (max-width: 768px) {
     
     h1 {
       font-size: 40px;
     }
 
-    /* Slider Mobile */
     .card {
       flex-direction: column;
       width: 100%;
@@ -550,13 +537,12 @@ $_SESSION['tittle'] = "DYROOM";
       right: 20px;
     }
 
-    /* Explore Section Mobile */
     section.explore {
       padding: 60px 20px;
     }
 
     .explore-container {
-      flex-direction: column-reverse; /* Gambar di atas, Text di bawah */
+      flex-direction: column-reverse;
       gap: 30px;
       text-align: center;
     }
@@ -572,11 +558,10 @@ $_SESSION['tittle'] = "DYROOM";
     }
 
     .explore-image img {
-      transform: rotate(0deg); /* Hilangkan rotasi di HP */
+      transform: rotate(0deg);
       max-width: 80%;
     }
 
-    /* Review Section Mobile */
     h2 {
       font-size: 30px;
     }
@@ -625,7 +610,7 @@ $_SESSION['tittle'] = "DYROOM";
 
 <header>
   <nav>
-    <img src="asset/logo.png" alt="DYROOM">
+    <img src="asset/Logo.png" alt="DYROOM">
     <a href="?url=view">
       <i class="bi bi-search" id="search"></i>
     </a>
@@ -750,7 +735,6 @@ $_SESSION['tittle'] = "DYROOM";
 </main>
 
 <script>
-  // === SLIDER LOGIC ===
   const slider = document.getElementById('produkSlider');
   const cards = document.querySelectorAll('.card');
   const dots = document.querySelectorAll('.slider-line a');
@@ -787,7 +771,6 @@ $_SESSION['tittle'] = "DYROOM";
     goToSlide(currentIndex - 1);
   }
 
-  // Event Listeners
   prevBtn.addEventListener('click', () => {
     prevSlide();
     resetAutoSlide();
@@ -805,7 +788,6 @@ $_SESSION['tittle'] = "DYROOM";
     });
   });
 
-  // Scroll Sync
   const observerOptions = {
     root: slider, 
     rootMargin: '0px',
@@ -827,9 +809,8 @@ $_SESSION['tittle'] = "DYROOM";
 
   cards.forEach(card => slideObserver.observe(card));
 
-  // Auto-slide
   function startAutoSlide() {
-    autoSlideInterval = setInterval(nextSlide, 20000); // 20 detik
+    autoSlideInterval = setInterval(nextSlide, 20000);
   }
 
   function resetAutoSlide() {
@@ -840,7 +821,6 @@ $_SESSION['tittle'] = "DYROOM";
   startAutoSlide();
 
 
-  // === SCROLL REVEAL ANIMATION ===
   function revealOnScroll() {
     const reveals = document.querySelectorAll('.reveal');
     const revealObserver = new IntersectionObserver((entries, observer) => {
@@ -856,24 +836,20 @@ $_SESSION['tittle'] = "DYROOM";
   revealOnScroll();
 
 
-  /* === SCRIPT PEMBUAT BINTANG (STAR GENERATOR) === */
   document.addEventListener("DOMContentLoaded", () => {
     const starContainer = document.getElementById('star-container');
-    const starCount = 150; // Jumlah bintang, bisa ditambah/dikurang
+    const starCount = 150;
 
     for (let i = 0; i < starCount; i++) {
       const star = document.createElement('div');
       star.classList.add('star');
       
-      // Posisi Random
-      const x = Math.random() * 100; // 0% sampai 100% lebar
-      const y = Math.random() * 100; // 0% sampai 100% tinggi
+      const x = Math.random() * 100;
+      const y = Math.random() * 100;
       
-      // Ukuran Random (Kecil agar elegan)
-      const size = Math.random() * 2 + 1; // 1px sampai 3px
+      const size = Math.random() * 2 + 1;
       
-      // Durasi kedip random (supaya tidak barengan)
-      const duration = Math.random() * 3 + 2; // 2s sampai 5s
+      const duration = Math.random() * 3 + 2;
       
       star.style.left = `${x}%`;
       star.style.top = `${y}%`;
@@ -884,6 +860,5 @@ $_SESSION['tittle'] = "DYROOM";
       starContainer.appendChild(star);
     }
   });
-  /* ================================================= */
-
+  
 </script>

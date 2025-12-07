@@ -7,9 +7,11 @@
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="css/global.css">
-    <?php include 'koneksi/db.php';
-    
+    <?php 
     session_start();
+
+ 
+
       $url = $_GET['url'] ?? 'home';
     $tittle = $_SESSION['tittle'] ?? "DYROOM";
     
@@ -27,7 +29,7 @@
 </head>
 <body>
   <!-- navbar -->
-   <?php if($url != 'home') {
+   <?php if(($url != 'home') && ($url != 'akun')) {
         include 'components/navbar.php';
    }?>
 
@@ -39,7 +41,6 @@
     <?php include 'components/footer.php'; ?>
 
     <?php include 'components/animation.php'; ?>
-
 
 </body>
 </html>

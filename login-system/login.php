@@ -1,6 +1,9 @@
 <?php
 session_start();
-include '../koneksi/db.php'; 
+include '../config/db.php'; 
+
+$database = new Database();
+$conn = $database->getConnection();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
@@ -17,17 +20,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (password_verify($pass, $row["password"])) {
             $_SESSION["email"] = $row["email"];
             $_SESSION["nama"]  = $row["nama"];
-            // $redirect = isset($_SESSION["redirect_url"]) ? $_SESSION["redirect_url"] : "../index.php";
-            // unset($_SESSION["redirect_url"]);
-            // if ($_SESSION["redirect_url"] == "") {
             $_SESSION['intro'] = 0;
-            header("Location: ../../?url=view.php");
+            header("Location: ../?url=view");
             exit();
         } else {
-            echo "<p style='color:red;text-align:center;'>❌ Password salah!</p>";
+            echo "<p style='color:red;text-align:center;'>Email atau Password Salah</p>";
         }
     } else {
-        echo "<p style='color:red;text-align:center;'>❌ Email tidak ditemukan!</p>";
+        echo "<p style='color:red;text-align:center;'>Email atau Password Salah</p>";
     }
 }
 ?>

@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Register</title>
 </head>
 <body>
     <style>
@@ -88,8 +88,10 @@ a {
 }
 </style>
 
-<?php include '../koneksi/db.php'; 
+<?php include '../config/db.php'; 
 
+$database = new Database();
+$conn = $database->getConnection();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nama  = $_POST["nama"];
@@ -105,9 +107,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION["email"] = $email;
         $_SESSION["nama"]  = $nama;
 
-        // $redirect = isset($_SESSION["redirect_url"]) ? $_SESSION["redirect_url"] : "../view.php";
-        // unset($_SESSION["redirect_url"]);
-        header("Location: ../../?url=view.php");
+        header("Location: ../?url=view");
         exit();
     } else {
         echo "Error: " . $stmt->error;

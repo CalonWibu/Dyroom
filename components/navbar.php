@@ -1,7 +1,7 @@
     <style>
          
          header {
-          position: fixed;
+          
           width: 100%;
          }
 
@@ -10,6 +10,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 20px 30px 25px 30px;
+      
     }
 
     #profil {
@@ -27,7 +28,7 @@
     <header>
       <center>
         <nav>
-            <img src="../asset/logo.png" alt="DYROOM" style="cursor: pointer;" onclick="window.location.href='index.php?url=home'">
+            <img src="asset/Logo.png" alt="DYROOM" style="cursor: pointer;" onclick="window.location.href='index.php?url=home'">
 
             <?php
            

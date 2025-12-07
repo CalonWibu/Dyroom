@@ -1,5 +1,9 @@
 <?php
-include 'koneksi/db.php';
+include 'config/db.php';
+$database = new Database();
+$conn = $database->getConnection();
+
+
 
 if (!isset($_SESSION['email'])) {
     die("Anda harus login terlebih dahulu.");
@@ -27,7 +31,6 @@ if ($order) {
         header("Location: proses/payment-proses.php");
         exit;
     } elseif ($order['status'] == 'paid') {
-        // ambil data dari table personal
         $stmt = $conn->prepare("SELECT country FROM personal WHERE id_pembeli = ?");
         $stmt->bind_param("i", $user_id);
         $stmt->execute();
@@ -173,8 +176,7 @@ if ($order) {
         [[20.5937, 78.9629], coords],
         {color: '#00ffff', weight: 2}
       ).addTo(map);
-        // biar keliatan bedanya soalnya deket deketan
-      let zoomLevel = 4;
+        let zoomLevel = 4;
       if (country === "Indonesia" || country === "Malaysia" || country === "Singapore") {
         zoomLevel = 6;
       }

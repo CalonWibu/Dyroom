@@ -1,4 +1,7 @@
 <?php
 session_start();
-include 'koneksi/db.php';
+include 'config/db.php';
+
+$database = new Database();
+$conn = $database->getConnection();
 ?>

@@ -23,7 +23,6 @@ $_SESSION['tittle'] = "DYROOM | SHOW ROOM";
         * {
             margin: 0;
             padding: 0;
-            /* Tambahan ini penting agar ukuran tidak melebar keluar batas */
             box-sizing: border-box; 
         }
 
@@ -176,13 +175,12 @@ $_SESSION['tittle'] = "DYROOM | SHOW ROOM";
 
 
     .card button {
-      /* Flex 1 dihapus agar tombol tidak meregang aneh */
       background: transparent;
       border: 1px solid #f5b800;
       color: #f5b800;
       padding: 6px 0;
       margin: 10px 15px 15px 15px;
-      width: calc(100% - 30px); /* Kalkulasi agar margin kiri kanan pas */
+      width: calc(100% - 30px);
       border-radius: 5px;
       cursor: pointer;
       font-weight: bold;
@@ -272,7 +270,7 @@ $_SESSION['tittle'] = "DYROOM | SHOW ROOM";
           if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) { ?>
                       <div class='card'>
-                          <img src='../asset/mobil/<?= $row['img_car']?>' alt='<?=$row['nama_car']?>'>
+                          <img src='asset/mobil/<?= $row['img_car']?>' alt='<?=$row['nama_car']?>'>
                           <p class='seri'><?=$row['seri']?></p>
                           <p class='nama-car'><?=$row['nama_car']?></p>
                           <span class='info'>
