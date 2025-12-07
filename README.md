@@ -7,7 +7,7 @@ PLZ jangan nyolong, ini tugas
 >>>>>>> 323605fd0746f6f6f7d3144248152f578a5e9442
 
 
-#Dokumentasi
+# Dokumentasi
 
 Penggunaan AI 48% (Tailwind dan paymentgateway)
 
@@ -24,5 +24,5 @@ Fitur :
 Kekurangan :
 Karena saya tidak terlalu paham dengan MVC, OOP dan lainnya, jadi project ini hanya memiliki MVC yang terbatas. saya sedang mencoba membuat versi MVC Lengkap dari Project ini.
 
-#Note Untuk Guru Saya :
+# Note Untuk Guru Saya :
 Maaf jika telat mengumpulkan karena tidak melihat form pengumpulan di classroom dan mungkin saya baru melihat ulang dan saya baru post di github versi 99,2% nya
